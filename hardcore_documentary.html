@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正堃一嘉 | Hardcore Documentary</title>
+    <!-- 引入指定的字体：Inter 和 Montserrat -->
+    <link rel="preconnect" href="https://gs.jurieo.com/gemini/fonts-googleapis">
+    <link rel="preconnect" href="https://gs.jurieo.com/gemini/fonts-gstatic" crossorigin>
+    <link href="https://gs.jurieo.com/gemini/fonts-googleapis/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#000000',
+                        paper: '#ffffff',
+                        inkstone: '#181818',
+                        'felt-gray': '#6d6d6d',
+                        'slate-pill': '#636363',
+                        'ash-mist': '#9a9a9a',
+                        pewter: '#808080',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        heading: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        sys: ['system-ui', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'micro': ['11px', '1.36'],
+                        'caption': ['12px', '1.19'],
+                        'body-sm': ['16px', '1.15'],
+                        'body': ['18px', '1.21'],
+                        'subheading': ['39px', '1.19'],
+                        'subheading-lg': ['45px', '1.15'],
+                        'heading-sm': ['54px', '1.39'],
+                        'heading': ['78px', '1.10'],
+                        'heading-lg': ['94px', '0.76'],
+                        'display': ['clamp(80px, 15vw, 225px)', '1.25'],
+                    },
+                    spacing: {
+                        '8': '8px',
+                        '12': '12px',
+                        '14': '14px',
+                        '28': '28px',
+                        '34': '34px',
+                        '40': '40px',
+                        '46': '46px',
+                        '48': '48px',
+                        '64': '64px',
+                        '68': '68px',
+                        '152': '152px',
+                    },
+                    maxWidth: {
+                        'page': '1078px',
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'pill': '75px',
+                    },
+                    transitionTimingFunction: {
+                        'patient': 'cubic-bezier(0.19, 1, 0.22, 1)',
+                    },
+                    transitionDuration: {
+                        '800': '800ms',
+                        '1250': '1250ms',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Fluid Effect */
+        .fluid-container {
+            position: absolute;
+            inset: -10%;
+            z-index: 0;
+            background-color: #050202;
+            filter: blur(35px) contrast(3.5) saturate(1.3);
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .fluid-blob {
+            position: absolute;
+            border-radius: 50%;
+            will-change: transform;
+        }
+
+        .fluid-blob-1 {
+            width: 80vw; height: 80vw;
+            background: radial-gradient(circle, rgb(165, 45, 37) 0%, transparent 65%);
+            top: -20%; left: -10%;
+            animation: blob-move-1 25s infinite alternate cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .fluid-blob-2 {
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgb(255, 172, 46) 0%, transparent 60%);
+            bottom: -20%; right: -10%;
+            animation: blob-move-2 20s infinite alternate cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .fluid-blob-3 {
+            width: 70vw; height: 70vw;
+            background: radial-gradient(circle, rgb(160, 224, 171) 0%, transparent 65%);
+            top: 20%; left: 30%;
+            animation: blob-move-3 28s infinite alternate cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .fluid-blob-4 {
+            width: 45vw; height: 45vw;
+            background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+            top: 40%; left: 20%;
+            opacity: 0.8;
+            animation: blob-move-4 22s infinite alternate cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        @keyframes blob-move-1 { 0% { transform: translate(0, 0) scale(1) rotate(0deg); } 100% { transform: translate(30vw, 20vh) scale(1.1) rotate(45deg); } }
+        @keyframes blob-move-2 { 0% { transform: translate(0, 0) scale(1.2) rotate(0deg); } 100% { transform: translate(-30vw, -20vh) scale(0.9) rotate(-45deg); } }
+        @keyframes blob-move-3 { 0% { transform: translate(0, 0) scale(0.9) rotate(0deg); } 100% { transform: translate(-20vw, 30vh) scale(1.1) rotate(30deg); } }
+        @keyframes blob-move-4 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40vw, -30vh) scale(1.3); } }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.25s cubic-bezier(0.19, 1, 0.22, 1), transform 1.25s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        a.editorial-link { transition: letter-spacing 0.8s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease; }
+        a.editorial-link:hover { letter-spacing: 0.05em; opacity: 0.6; }
+
+        /* 统一包裹器的3D环境，用于实现全局速度滚筒 */
+        #page-wrapper {
+            will-change: transform, transform-origin;
+            transform-style: preserve-3d;
+        }
+        
+        /* 高级核心 IP 悬停动效 */
+        .cinematic-title-link {
+            position: relative;
+            display: inline-block;
+            color: #ffffff;
+            text-decoration: none;
+            /* 平滑过渡字间距、发光效果和透明度 */
+            transition: letter-spacing 1s cubic-bezier(0.19, 1, 0.22, 1), text-shadow 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.8s ease;
+            /* 默认开启持续呼吸灯效，暗示可点击 */
+            animation: core-ip-breathe 2.5s infinite alternate ease-in-out;
+        }
+        
+        @keyframes core-ip-breathe {
+            0% { text-shadow: 0 0 5px rgba(255,255,255,0.1); opacity: 0.8; }
+            100% { text-shadow: 0 0 25px rgba(255,255,255,0.6), 0 0 45px rgba(255,255,255,0.2); opacity: 1; }
+        }
+
+        .cinematic-title-link::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #ffffff;
+            transform: scaleX(0);
+            /* 默认状态锚点在右侧，移开时向右收起 */
+            transform-origin: right;
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+        }
+
+        .cinematic-title-link:hover {
+            letter-spacing: 0.08em;
+            /* 悬停时取消动画呼吸，平滑过渡锁定在最强的高光状态 */
+            animation: none;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 60px rgba(255, 255, 255, 0.4);
+            opacity: 1;
+        }
+
+        .cinematic-title-link:hover::after {
+            transform: scaleX(1);
+            /* 悬停时锚点在左侧，从左侧展开 */
+            transform-origin: left;
+        }
+
+        ::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-sans font-normal antialiased selection:bg-paper selection:text-obsidian bg-obsidian text-paper">
+
+    <!-- Fixed Global Fluid Background -->
+    <div class="fixed inset-0 z-[0] overflow-hidden pointer-events-none">
+        <div class="fluid-container absolute inset-0 z-0">
+            <div class="fluid-blob fluid-blob-1"></div>
+            <div class="fluid-blob fluid-blob-2"></div>
+            <div class="fluid-blob fluid-blob-3"></div>
+            <div class="fluid-blob fluid-blob-4"></div>
+        </div>
+        
+        <svg class="absolute inset-0 w-full h-full opacity-[0.35] z-[1] mix-blend-overlay">
+            <filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+        </svg>
+        
+        <!-- 全局压暗层：保证上层文字无论背景球体运行到哪里都绝对清晰可读 -->
+        <div class="absolute inset-0 bg-black/60 z-[2] mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-black/40 z-[3]"></div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header id="main-header" class="fixed top-0 left-0 w-full h-[66px] z-[100] flex justify-between items-center px-6 md:px-12 mix-blend-difference text-white transition-all duration-700 ease-patient">
+        <div class="text-body-sm font-normal">正堃一嘉</div>
+        <nav class="flex gap-6 text-micro font-normal">
+            <a href="#about" class="editorial-link">ABOUT</a>
+            <a href="#works" class="editorial-link">WORKS</a>
+            <a href="#business" class="editorial-link">BUSINESS</a>
+        </nav>
+    </header>
+
+    <!-- 全局页面包裹器：所有的内容都在这里，用于全局 3D 滚筒计算 -->
+    <main id="page-wrapper" class="relative w-full z-10">
+        
+        <!-- Hero Section -->
+        <section class="relative w-full h-screen flex flex-col justify-center items-center overflow-hidden z-10">
+            <div class="relative z-10 w-full max-w-page mx-auto px-6 text-center flex flex-col justify-center items-center h-full">
+                <p class="text-caption font-light tracking-[0.2em] uppercase mb-8 opacity-70">Hardcore Documentary</p>
+                <h1 class="text-display font-normal text-paper mb-4 whitespace-nowrap -ml-[2vw]">重构真实</h1>
+                <h1 class="text-display font-normal text-paper whitespace-nowrap ml-[2vw]">硬核纪实</h1>
+            </div>
+        </section>
+
+        <!-- Level 1: Glass (Dark Surface) - Profile -->
+        <section id="about" class="relative z-10">
+            <div class="bg-black/30 backdrop-blur-2xl border-y border-white/10 py-[100px] md:py-152 w-full">
+                <div class="max-w-page mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-46 reveal">
+                    <!-- 左侧核心标题 -->
+                    <div class="md:col-span-6">
+                        <h2 class="font-light tracking-tight mb-12">
+                            <span class="block text-subheading md:text-heading-sm text-ash-mist mb-2 md:mb-4">用中国人的视角</span>
+                            <span class="block text-heading-lg text-paper leading-none">看世界。</span>
+                        </h2>
+                        <button class="rounded-pill border border-white/30 text-paper text-body-sm font-normal py-[11px] px-[33px] bg-transparent hover:bg-paper hover:text-obsidian transition-all duration-800 ease-patient inline-flex items-center gap-4">
+                            <span>成立于 2019 年</span>
+                        </button>
+                    </div>
+                    <!-- 右侧精致长文段落 -->
+                    <div class="md:col-span-5 md:col-start-8 flex flex-col justify-end">
+                        <div class="border-l border-white/20 pl-6 md:pl-8 text-justify">
+                            <p class="text-body leading-[1.8] font-normal text-white/90 mb-6">
+                                北京正堃一嘉文化创意有限公司，是国内具有高度影响力的纪实影视创作团队。我们致力于探索纪实内容与视听美学的深度结合，打破传统表达边界。
+                            </p>
+                            <p class="text-body-sm leading-[1.8] font-normal text-ash-mist">
+                                通过极具沉浸感的创新表达方式，向世界传递真实、深刻、有温度的中国视角。我们的镜头从未停止探寻。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Level 3: Core IP -->
+        <section class="relative z-10">
+            <div class="bg-transparent text-paper py-[100px] md:py-152 w-full">
+                <div class="max-w-page mx-auto px-6 reveal">
+                    <div class="mb-46 flex flex-col md:flex-row justify-between items-end gap-8 border-b border-white/20 pb-12">
+                        <div>
+                            <p class="text-caption text-ash-mist uppercase tracking-widest mb-4">Core IP</p>
+                            <h2 class="text-heading-lg font-normal leading-heading-lg mb-4">
+                                <a href="https://space.bilibili.com/31779222" target="_blank" rel="noopener noreferrer" class="cinematic-title-link">食贫道</a>
+                            </h2>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-body font-normal text-ash-mist max-w-sm">Bilibili 现象级纪实标杆，重构长视频内容价值。多年百大UP主、原创栏目奖获得者。</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-y border-white/10 bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl">
+                        <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-center">
+                            <p class="text-heading font-light leading-none mb-2 text-paper">9.5M<span class="text-body-sm text-ash-mist ml-2">+</span></p>
+                            <p class="text-caption text-ash-mist uppercase tracking-wider">全网粉丝量</p>
+                        </div>
+                        <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-center">
+                            <p class="text-heading font-light leading-none mb-2 text-paper">3.56M</p>
+                            <p class="text-caption text-ash-mist uppercase tracking-wider">充电订阅用户 (全站第一)</p>
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center">
+                            <p class="text-heading font-light leading-none mb-2 text-paper">31.8M</p>
+                            <p class="text-caption text-ash-mist uppercase tracking-wider">《迷失东京》播放量</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center md:text-left">
+                        <a href="#" class="inline-block rounded-pill border border-white/30 text-paper text-body-sm font-normal py-[11px] px-[33px] bg-transparent hover:bg-paper hover:text-obsidian transition-all duration-800 ease-patient">访问频道主页</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Level 1: Glass - Masterpieces (Project List) -->
+        <section id="works" class="relative z-10">
+            <div class="bg-black/30 backdrop-blur-2xl border-y border-white/10 text-paper py-[100px] md:py-152 w-full">
+                <div class="max-w-page mx-auto px-6">
+                    <h2 class="text-heading-sm font-heading mb-16 md:mb-24 reveal text-paper">Selected Works</h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                        
+                        <!-- Project 1 -->
+                        <div class="relative group aspect-[2/3] z-10 hover:z-50 reveal cursor-pointer">
+                            <div class="w-full h-full bg-inkstone overflow-hidden border border-obsidian/10">
+                                <img src="http://googleusercontent.com/image_collection/image_retrieval/5899578989491479256_0" alt="Lost in Tokyo" class="w-full h-full object-cover filter grayscale transition-all duration-1250 ease-patient group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-50">
+                            </div>
+                            
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[130%] min-w-[280px] bg-black/55 backdrop-blur-2xl border border-white/20 rounded-[20px] p-6 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-800 ease-patient shadow-[0_40px_80px_rgba(0,0,0,0.8)] pointer-events-none group-hover:pointer-events-auto flex flex-col text-paper">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="pr-2">
+                                        <h3 class="text-2xl font-bold leading-tight drop-shadow-md tracking-wide">迷失东京 <span class="text-xs font-normal text-white/60">(2023)</span></h3>
+                                        <p class="text-[11px] italic text-white/80 mt-1 font-light">开启内容付费新纪元</p>
+                                    </div>
+                                    <div class="relative w-12 h-12 flex-shrink-0 flex flex-col items-center">
+                                        <span class="text-[8px] text-white/60 mb-1 uppercase tracking-wider absolute -top-4 whitespace-nowrap">Score</span>
+                                        <svg class="w-full h-full transform -rotate-90 drop-shadow-md" viewBox="0 0 36 36">
+                                            <path class="text-white/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" />
+                                            <path class="text-paper" stroke-dasharray="98, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" />
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center mt-[2px]"><span class="text-xs font-bold">9.8</span></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4"><span class="inline-block bg-paper text-obsidian text-[10px] font-bold px-3 py-1 rounded-pill uppercase tracking-wider">现象级长片</span></div>
+                                <p class="text-xs text-white/90 leading-relaxed mb-6 line-clamp-4 drop-shadow-sm font-light">
+                                    创纪录的千万级播放长片。在繁华与落寞交织的东京街头，我们用最硬核的镜头剖析那些不为人知的真实切面与社会纹理。
+                                </p>
+                                <div class="flex gap-2 mt-auto">
+                                    <button class="flex-1 bg-white/10 hover:bg-white/25 border border-white/30 text-white text-[11px] font-semibold py-2 rounded-pill transition-all backdrop-blur-md">PLAY NOW</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="relative group aspect-[2/3] z-10 hover:z-50 reveal cursor-pointer" style="transition-delay: 100ms;">
+                            <div class="w-full h-full bg-inkstone overflow-hidden border border-obsidian/10">
+                                <img src="http://googleusercontent.com/image_collection/image_retrieval/8329776943274935007_0" alt="Canaan Orphans" class="w-full h-full object-cover filter grayscale transition-all duration-1250 ease-patient group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-50">
+                            </div>
+                            
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[130%] min-w-[280px] bg-black/55 backdrop-blur-2xl border border-white/20 rounded-[20px] p-6 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-800 ease-patient shadow-[0_40px_80px_rgba(0,0,0,0.8)] pointer-events-none group-hover:pointer-events-auto flex flex-col text-paper">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="pr-2">
+                                        <h3 class="text-2xl font-bold leading-tight drop-shadow-md tracking-wide">迦南孤儿 <span class="text-xs font-normal text-white/60">(2023)</span></h3>
+                                        <p class="text-[11px] italic text-white/80 mt-1 font-light">直击巴以冲突前线</p>
+                                    </div>
+                                    <div class="relative w-12 h-12 flex-shrink-0 flex flex-col items-center">
+                                        <span class="text-[8px] text-white/60 mb-1 uppercase tracking-wider absolute -top-4 whitespace-nowrap">Score</span>
+                                        <svg class="w-full h-full transform -rotate-90 drop-shadow-md" viewBox="0 0 36 36">
+                                            <path class="text-white/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" />
+                                            <path class="text-paper" stroke-dasharray="96, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" />
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center mt-[2px]"><span class="text-xs font-bold">9.6</span></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4"><span class="inline-block bg-paper text-obsidian text-[10px] font-bold px-3 py-1 rounded-pill uppercase tracking-wider">战地纪实</span></div>
+                                <p class="text-xs text-white/90 leading-relaxed mb-6 line-clamp-4 drop-shadow-sm font-light">
+                                    亲临巴以冲突现场，在断壁残垣中记录最残酷的战争现实，展现硝烟下无辜平民的真实生存境遇。
+                                </p>
+                                <div class="flex gap-2 mt-auto">
+                                    <button class="flex-1 bg-white/10 hover:bg-white/25 border border-white/30 text-white text-[11px] font-semibold py-2 rounded-pill transition-all backdrop-blur-md">PLAY NOW</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="relative group aspect-[2/3] z-10 hover:z-50 reveal cursor-pointer" style="transition-delay: 200ms;">
+                            <div class="w-full h-full bg-inkstone overflow-hidden border border-obsidian/10">
+                                <img src="http://googleusercontent.com/image_collection/image_retrieval/5121094886599809839_0" alt="Radiation" class="w-full h-full object-cover filter grayscale transition-all duration-1250 ease-patient group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-50">
+                            </div>
+                            
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[130%] min-w-[280px] bg-black/55 backdrop-blur-2xl border border-white/20 rounded-[20px] p-6 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-800 ease-patient shadow-[0_40px_80px_rgba(0,0,0,0.8)] pointer-events-none group-hover:pointer-events-auto flex flex-col text-paper">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="pr-2">
+                                        <h3 class="text-2xl font-bold leading-tight drop-shadow-md tracking-wide">世纪辐射 <span class="text-xs font-normal text-white/60">(2022)</span></h3>
+                                        <p class="text-[11px] italic text-white/80 mt-1 font-light">俄乌局势全景剖析</p>
+                                    </div>
+                                    <div class="relative w-12 h-12 flex-shrink-0 flex flex-col items-center">
+                                        <span class="text-[8px] text-white/60 mb-1 uppercase tracking-wider absolute -top-4 whitespace-nowrap">Score</span>
+                                        <svg class="w-full h-full transform -rotate-90 drop-shadow-md" viewBox="0 0 36 36">
+                                            <path class="text-white/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" />
+                                            <path class="text-paper" stroke-dasharray="95, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" />
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center mt-[2px]"><span class="text-xs font-bold">9.5</span></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4"><span class="inline-block bg-paper text-obsidian text-[10px] font-bold px-3 py-1 rounded-pill uppercase tracking-wider">深度探讨</span></div>
+                                <p class="text-xs text-white/90 leading-relaxed mb-6 line-clamp-4 drop-shadow-sm font-light">
+                                    透过重重迷雾，深入探讨地缘政治背后的历史渊源，用客观冷静的视角解析影响世界的世纪大变局。
+                                </p>
+                                <div class="flex gap-2 mt-auto">
+                                    <button class="flex-1 bg-white/10 hover:bg-white/25 border border-white/30 text-white text-[11px] font-semibold py-2 rounded-pill transition-all backdrop-blur-md">PLAY NOW</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 4 -->
+                        <div class="relative group aspect-[2/3] z-10 hover:z-50 reveal cursor-pointer" style="transition-delay: 300ms;">
+                            <div class="w-full h-full bg-inkstone overflow-hidden border border-obsidian/10">
+                                <img src="http://googleusercontent.com/image_collection/image_retrieval/7214393796946868249_0" alt="He Yi Dang Gui" class="w-full h-full object-cover filter grayscale transition-all duration-1250 ease-patient group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-50">
+                            </div>
+                            
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[130%] min-w-[280px] bg-black/55 backdrop-blur-2xl border border-white/20 rounded-[20px] p-6 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-800 ease-patient shadow-[0_40px_80px_rgba(0,0,0,0.8)] pointer-events-none group-hover:pointer-events-auto flex flex-col text-paper">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="pr-2">
+                                        <h3 class="text-2xl font-bold leading-tight drop-shadow-md tracking-wide">何以当归 <span class="text-xs font-normal text-white/60">(2021)</span></h3>
+                                        <p class="text-[11px] italic text-white/80 mt-1 font-light">数十部高质量作品矩阵</p>
+                                    </div>
+                                    <div class="relative w-12 h-12 flex-shrink-0 flex flex-col items-center">
+                                        <span class="text-[8px] text-white/60 mb-1 uppercase tracking-wider absolute -top-4 whitespace-nowrap">Score</span>
+                                        <svg class="w-full h-full transform -rotate-90 drop-shadow-md" viewBox="0 0 36 36">
+                                            <path class="text-white/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" />
+                                            <path class="text-paper" stroke-dasharray="97, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" />
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center mt-[2px]"><span class="text-xs font-bold">9.7</span></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4"><span class="inline-block bg-paper text-obsidian text-[10px] font-bold px-3 py-1 rounded-pill uppercase tracking-wider">系列精选</span></div>
+                                <p class="text-xs text-white/90 leading-relaxed mb-6 line-clamp-4 drop-shadow-sm font-light">
+                                    团队成立至今，已持续输出数十部兼顾社会价值与商业传播的高质量纪录长片，建立起深厚的美学壁垒。
+                                </p>
+                                <div class="flex gap-2 mt-auto">
+                                    <button class="flex-1 bg-white/10 hover:bg-white/25 border border-white/30 text-white text-[11px] font-semibold py-2 rounded-pill transition-all backdrop-blur-md">EXPLORE LIST</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Level 3: Transparent - Founders -->
+        <section class="relative z-10">
+            <div class="bg-transparent text-paper py-[100px] md:py-152 w-full">
+                 <div class="max-w-page mx-auto px-6 reveal">
+                    <p class="text-caption text-ash-mist uppercase tracking-widest mb-12 border-b border-white/20 pb-4">The Team</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+                        
+                        <!-- 饼叔 Profile Card -->
+                        <div class="group relative flex flex-col bg-white/5 backdrop-blur-xl border border-white/10 rounded-[20px] p-6 hover:bg-white/10 transition-colors duration-800 shadow-2xl">
+                            <div class="aspect-[3/4] w-full bg-inkstone mb-8 overflow-hidden relative rounded-[12px]">
+                                <!-- Fallback 占位图应对图片失效情况 -->
+                                <img src="https://placehold.co/600x800/181818/333333?text=BING+SHU" onerror="this.src='https://placehold.co/600x800/181818/333333?text=BING+SHU'" alt="饼叔" class="w-full h-full object-cover filter grayscale transition-all duration-1250 ease-patient group-hover:scale-105 group-hover:grayscale-0">
+                                
+                                <!-- Hover 展示的履历标签 -->
+                                <div class="absolute bottom-6 left-6 flex flex-wrap gap-2 pr-6 opacity-80 transition-opacity duration-800 group-hover:opacity-100">
+                                     <span class="bg-black/40 backdrop-blur-md text-paper text-[11px] px-4 py-2 rounded-pill border border-white/10">克里米亚冲突</span>
+                                     <span class="bg-black/40 backdrop-blur-md text-paper text-[11px] px-4 py-2 rounded-pill border border-white/10">巴以冲突</span>
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-subheading-lg font-normal mb-1">饼叔</h3>
+                            <p class="text-caption text-ash-mist uppercase tracking-widest mb-6">团队创始人 · 出镜主播</p>
+                            <p class="text-body-sm text-white/70 leading-[1.8] text-justify md:pr-12">
+                                硬核纪实主持人，亲赴全球最具争议与危险的第一线，在国内拥有巨量的观众群体与极高的信任度。
+                            </p>
+                        </div>
+
+                        <!-- 葛鑫 Profile Card (交错布局) -->
+                        <div class="group relative flex flex-col md:mt-32 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[20px] p-6 hover:bg-white/10 transition-colors duration-800 shadow-2xl">
+                            <div class="aspect-[3/4] w-full bg-inkstone mb-8 overflow-hidden relative rounded-[12px]">
+                                <img src="https://placehold.co/600x800/181818/333333?text=GE+XIN" onerror="this.src='https://placehold.co/600x800/181818/333333?text=GE+XIN'" alt="葛鑫" class="w-full h-full object-cover filter grayscale transition-all duration-1250 ease-patient group-hover:scale-105 group-hover:grayscale-0">
+                                
+                                <div class="absolute bottom-6 left-6 flex flex-wrap gap-2 pr-6 opacity-80 transition-opacity duration-800 group-hover:opacity-100">
+                                     <span class="bg-black/40 backdrop-blur-md text-paper text-[11px] px-4 py-2 rounded-pill border border-white/10">舌尖上的中国</span>
+                                     <span class="bg-black/40 backdrop-blur-md text-paper text-[11px] px-4 py-2 rounded-pill border border-white/10">小城夜食记</span>
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-subheading-lg font-normal mb-1">葛鑫</h3>
+                            <p class="text-caption text-ash-mist uppercase tracking-widest mb-6">团队创始人 · 总制片人</p>
+                            <p class="text-body-sm text-white/70 leading-[1.8] text-justify md:pr-12">
+                                拥有国家级纪录片创作底蕴与视听美学指导造诣，作品屡获殊荣，得到影视行业内的高度评价。
+                            </p>
+                        </div>
+                        
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Level 1: Glass - Business Map -->
+        <section id="business" class="relative z-10">
+            <div class="bg-black/50 backdrop-blur-3xl border-y border-white/10 text-paper py-[100px] md:py-152 w-full">
+                <div class="max-w-page mx-auto px-6 reveal">
+                    <h2 class="text-heading font-light leading-heading mb-24 text-paper">全链路业务版图</h2>
+
+                    <div class="flex flex-col gap-0 border-t border-white/20">
+                        
+                        <div class="py-12 border-b border-white/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start group hover:bg-white/5 px-6 -mx-6 rounded-2xl transition-colors duration-500">
+                            <div class="md:col-span-2 text-subheading-lg font-heading text-white/30 transition-colors duration-400 group-hover:text-paper">01</div>
+                            <div class="md:col-span-4"><h3 class="text-subheading font-normal leading-tight mb-4 text-paper">内容创作</h3></div>
+                            <div class="md:col-span-6 text-body-sm text-white/60 leading-relaxed group-hover:text-white/90 transition-colors duration-400">
+                                基于自有平台的内容创作与发行。依托千万级粉丝基本盘与卓越的新闻纪实叙事能力，保障内容在阵地的强势爆发与长尾传播。
+                            </div>
+                        </div>
+
+                        <div class="py-12 border-b border-white/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start group hover:bg-white/5 px-6 -mx-6 rounded-2xl transition-colors duration-500">
+                            <div class="md:col-span-2 text-subheading-lg font-heading text-white/30 transition-colors duration-400 group-hover:text-paper">02</div>
+                            <div class="md:col-span-4"><h3 class="text-subheading font-normal leading-tight mb-4 text-paper">内容制作</h3></div>
+                            <div class="md:col-span-6 text-body-sm text-white/60 leading-relaxed group-hover:text-white/90 transition-colors duration-400">
+                                承接顶尖机构影视项目定制。持《广播电视节目制作经营许可证》，与政务机构及央媒保持紧密合作，输出高标准视听作品。
+                            </div>
+                        </div>
+
+                        <div class="py-12 border-b border-white/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start group hover:bg-white/5 px-6 -mx-6 rounded-2xl transition-colors duration-500">
+                            <div class="md:col-span-2 text-subheading-lg font-heading text-white/30 transition-colors duration-400 group-hover:text-paper">03</div>
+                            <div class="md:col-span-4"><h3 class="text-subheading font-normal leading-tight mb-4 text-paper">商业融合</h3></div>
+                            <div class="md:col-span-6 text-body-sm text-white/60 leading-relaxed group-hover:text-white/90 transition-colors duration-400">
+                                拥有央视广告代理资质。拒绝生硬植入，用纪实电影的质感讲述品牌故事，重塑品牌调性与消费者共鸣。
+                            </div>
+                        </div>
+
+                        <div class="py-12 border-b border-white/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start group hover:bg-white/5 px-6 -mx-6 rounded-2xl transition-colors duration-500">
+                            <div class="md:col-span-2 text-subheading-lg font-heading text-white/30 transition-colors duration-400 group-hover:text-paper">04</div>
+                            <div class="md:col-span-4"><h3 class="text-subheading font-normal leading-tight mb-4 text-paper">全球制片</h3></div>
+                            <div class="md:col-span-6 text-body-sm text-white/60 leading-relaxed group-hover:text-white/90 transition-colors duration-400">
+                                跨越国界的强大制片保障。覆盖世界核心向导资源，解决复杂地缘环境拍摄难题，提供一站式落地服务。
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="relative z-10">
+            <div class="bg-black/60 backdrop-blur-2xl text-white/60 py-24 border-t border-white/10 w-full">
+                <div class="max-w-page mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-micro">
+                    <div class="flex flex-col gap-2">
+                        <p class="text-paper mb-2">正堃一嘉 (Beijing)</p>
+                        <p>Hardcore Documentary &</p>
+                        <p>Cinematic Narrative</p>
+                        <p class="mt-4">© 2019 - 2024. All Rights Reserved.</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <p class="text-paper mb-2">Contact</p>
+                        <a href="#" class="editorial-link">business@zk-yijia.com</a>
+                        <a href="#" class="editorial-link">media@zk-yijia.com</a>
+                    </div>
+                    <div class="flex flex-col gap-2 md:text-right">
+                        <p class="text-paper mb-2">Social</p>
+                        <a href="#" class="editorial-link">Bilibili</a>
+                        <a href="#" class="editorial-link">Weibo</a>
+                        <a href="#" class="editorial-link">WeChat</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // 1. Reveal Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        // 2. Cinematic Smooth Scroll for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+                
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    const targetY = targetSection.getBoundingClientRect().top + window.scrollY;
+                    smoothScrollTo(targetY, 1250);
+                }
+            });
+        });
+
+        function smoothScrollTo(targetY, duration) {
+            const startY = window.scrollY;
+            const distance = targetY - startY;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                const ease = 1 - Math.pow(1 - progress, 4);
+                window.scrollTo(0, startY + distance * ease);
+
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+            requestAnimationFrame(animation);
+        }
+
+        // 3. 全局滑动滚筒物理引擎 (Global Velocity Skew via Lerp)
+        const header = document.getElementById('main-header');
+        const pageWrapper = document.getElementById('page-wrapper');
+        
+        let currentScroll = window.scrollY;
+        let lastScroll = window.scrollY;
+        
+        // 我们利用 Lerp (线性插值) 来使角度变换极其丝滑，不会因为鼠标滚轮的一顿一顿而抽搐。
+        let targetRotate = 0;
+        let currentRotate = 0;
+
+        function renderLoop() {
+            currentScroll = window.scrollY;
+            
+            // 获取两帧之间的滚动距离
+            const delta = currentScroll - lastScroll;
+            lastScroll = currentScroll;
+
+            // 导航栏渐隐逻辑
+            if (currentScroll > window.innerHeight * 0.4) {
+                header.classList.add('opacity-0', 'pointer-events-none', '-translate-y-full');
+            } else {
+                header.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-full');
+            }
+
+            // --- 核心物理计算 ---
+            // 积累当前速度为目标旋转角度，0.85 决定了衰减速度，0.12 决定了滚动敏感度
+            targetRotate = targetRotate * 0.85 + (delta * 0.12);
+            
+            // 限制最大旋转角度，防止剧烈滑动时页面完全翻折 (最大后倾/前倾 18 度)
+            targetRotate = Math.max(-18, Math.min(18, targetRotate));
+
+            // 让当前的旋转角度“追赶”目标角度，0.15 决定了追赶的平滑度
+            currentRotate += (targetRotate - currentRotate) * 0.15;
+
+            // 归零补偿：如果转角极小，强制归零，防止引擎一直在做次像素运算导致文字模糊
+            if (Math.abs(currentRotate) < 0.05) {
+                currentRotate = 0;
+            }
+
+            // --- 渲染到 DOM ---
+            if (currentRotate !== 0) {
+                // 将 3D 旋转的原点动态锚定在用户视口的中心！
+                // 这样无论滑到哪里，页面都会像一个巨大的圆筒一样在您眼前转动。
+                const centerY = currentScroll + (window.innerHeight / 2);
+                pageWrapper.style.transformOrigin = `center ${centerY}px`;
+                pageWrapper.style.transform = `perspective(1200px) rotateX(${currentRotate}deg)`;
+            } else {
+                pageWrapper.style.transform = `perspective(1200px) rotateX(0deg)`;
+            }
+
+            // 保持引擎永远在线
+            requestAnimationFrame(renderLoop);
+        }
+
+        // 启动物理引擎
+        requestAnimationFrame(renderLoop);
+        
+    </script>
+</body>
+</html>
